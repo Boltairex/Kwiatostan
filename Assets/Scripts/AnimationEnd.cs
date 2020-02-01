@@ -19,7 +19,12 @@ public class AnimationEnd : MonoBehaviour
             case "Menu 4 - Options":
                 //Do Zrobienia
                 break;
-            
+            case "DialogueBackground":
+                if (Decision)
+                { Dialogue.DialScroll = 1; }
+                //else
+                //{ Dialogue.DialScroll = -1; }
+                break;
         }
     }
 }

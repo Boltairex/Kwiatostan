@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+using static StaticFunc;
 
 public class MenuController : MonoBehaviour
 {
@@ -11,7 +12,12 @@ public class MenuController : MonoBehaviour
     public Animator MenuA2;
     int mode = 0;
 
-    void Update()
+    private void Start()
+    {
+        MenuC = gameObject.GetComponent<MenuController>();
+    }
+
+    private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
