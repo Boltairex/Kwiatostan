@@ -39,6 +39,14 @@ public class DialogueSystem : MonoBehaviour
             DialogueWindow.SetActive(false);
         }
 
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            if (DialogueOn)
+                DialogueOn = false;
+            else
+                DialogueOn = true;
+        }
+
         if (Input.GetKeyDown(KeyCode.KeypadEnter))
         {
             DecisionsOpen();
@@ -63,13 +71,13 @@ public class DialogueSystem : MonoBehaviour
             Block = false;
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        if (Input.GetKeyDown(KeyCode.Alpha1) && Decision)
             DialScroll = 1;
-        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        else if (Input.GetKeyDown(KeyCode.Alpha2) && Decision)
             DialScroll = 2;
-        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        else if (Input.GetKeyDown(KeyCode.Alpha3) && Decision)
             DialScroll = 3;
-        else if (Input.GetKeyDown(KeyCode.Alpha4))
+        else if (Input.GetKeyDown(KeyCode.Alpha4) && Decision)
             DialScroll = 4;
 
         switch (DialScroll)
