@@ -71,6 +71,11 @@ public class DialogueSystem : MonoBehaviour
             Block = false;
         }
 
+        if (!Decision)
+        {
+            DialScroll = -1;
+        }
+
         if (Input.GetKeyDown(KeyCode.Alpha1) && Decision)
             DialScroll = 1;
         else if (Input.GetKeyDown(KeyCode.Alpha2) && Decision)
@@ -114,9 +119,6 @@ public class DialogueSystem : MonoBehaviour
                 Background2.color = new Color(0.14f, 0.14f, 0.14f, 0.7f);
                 Background3.color = new Color(0.14f, 0.14f, 0.14f, 0.7f);
                 Background1.color = new Color(0.14f, 0.14f, 0.14f, 0.7f);
-                break;
-            case 5:
-                DialScroll = 1;
                 break;
             default:
                 DialScroll = 1;

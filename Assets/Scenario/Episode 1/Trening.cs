@@ -5,21 +5,27 @@ public class Trening : MonoBehaviour
 {
     public int DialogueID = 0;
     public int MultiDialogue = 1;
+    public int LastDialogue = 0;
     public bool AwaitForChoice = false;
-    public bool Accepted = false;
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(1) && !AwaitForChoice)
+        if (Input.GetMouseButtonDown(1) && !AwaitForChoice || Input.GetKeyDown(KeyCode.Return) && !AwaitForChoice )
         {
             DialogueID++;
+        }
+
+        //Testowe
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            DialogueID = 1;
         }
 
         switch (DialogueID)
         {
             case 1:
                 Dialogue.OutputText.text =
-                    "<i>Grupa przyjaciół, umówiła się po końcu roku szkolnego by uczcić wakacje. \n" +
+                    "<i>Grupa przyjaciół umówiła się po końcu roku szkolnego, by uczcić wakacje. \n" +
                     "Wszyscy spotkali sie u Lukiego, i każdy przyniósł coś od siebie. Regi kupił Orzeszki w czekoladzie, Boltu napoje, a Matt... Zapomniał, ale każdy przymknął na to oko. \n" +
                     "Uroczystość odbyła się wieczorem po 19. Jako iż było lato, uznali że zdążą wszystko przygotować zanim się ściemni...</i>";
                 break;
@@ -32,16 +38,11 @@ public class Trening : MonoBehaviour
                     "<size=80%>Boltu, wiesz może kiedy przyjdzie Rawi?";
                 break;
             case 4:
-                DecisionsOpen();
                 Dialogue.FirstText.text = "Opanowanie";
                 Dialogue.SecoundText.text = "Pewnie";
                 Dialogue.ThirdText.text = "Niepewnie";
                 Dialogue.FourthText.text = "Wymijająco";
-                if (Accepted == false)
-                {
-                    AwaitForChoice = true;
-                }
-                if (Input.GetKeyUp(KeyCode.Return) && !Accepted)
+                if (Input.GetKeyDown(KeyCode.Return) && AwaitForChoice)
                 {
                     if (Dialogue.DialScroll != -1)
                         MultiDialogue = Dialogue.DialScroll;
@@ -64,10 +65,10 @@ public class Trening : MonoBehaviour
                             "<size=80%>A jak życie mija...?";
                             break;
                     }
-                    Accepted = true;
                     AwaitForChoice = false;
-                    Decision = false; // Do uproszczenia!
+                    DecisionsClose();
                 }
+                SetDialogue();
                 break;
             case 5:
                 switch (MultiDialogue)
@@ -120,6 +121,16 @@ public class Trening : MonoBehaviour
             case 15:
 
                 break;
+        }
+    }
+
+    private void SetDialogue()
+    {
+        if (LastDialogue != DialogueID)
+        {
+            AwaitForChoice = true;
+            DecisionsOpen();
+            LastDialogue = DialogueID;
         }
     }
 }
